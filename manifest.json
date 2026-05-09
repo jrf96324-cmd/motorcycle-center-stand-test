@@ -1,0 +1,23 @@
+{
+  "name": "機車主腳架耐久測試機",
+  "short_name": "主腳架測試",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#08142b",
+  "theme_color": "#08142b",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%2308142b'/%3E%3Ccircle cx='96' cy='96' r='54' fill='%232bb6ff'/%3E%3Cpath d='M58 102h76v12H58z' fill='%23081a32'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='88' fill='%2308142b'/%3E%3Ccircle cx='256' cy='256' r='146' fill='%232bb6ff'/%3E%3Cpath d='M150 274h212v34H150z' fill='%23081a32'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08142b" />
+    <title>機車主腳架耐久測試機</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="header">
+        <h1>機車主腳架耐久測試機</h1>
+        <p class="subtitle">Dashboard / 現場工程工具</p>
+      </header>
+
+      <section class="panel mode-panel" aria-label="模式切換">
+        <h2>模式</h2>
+        <div class="mode-switch" role="group" aria-label="模式切換">
+          <button id="autoModeBtn" class="btn mode active" type="button">自動模式</button>
+          <button id="manualModeBtn" class="btn mode" type="button">手動模式</button>
+        </div>
+      </section>
+
+      <section class="panel control-panel" aria-label="控制按鈕">
+        <h2>控制</h2>
+        <div class="control-grid">
+          <button id="startBtn" class="btn primary" type="button">啟動</button>
+          <button id="stopBtn" class="btn warning" type="button">停止</button>
+          <button id="estopBtn" class="btn danger" type="button">急停</button>
+        </div>
+      </section>
+
+      <section class="panel status-panel" aria-label="機台狀態">
+        <h2>狀態</h2>
+        <div class="status-list">
+          <article class="status-item">
+            <span class="label">伺服下壓</span>
+            <span id="servoStatus" class="state-pill on">ON</span>
+          </article>
+          <article class="status-item">
+            <span class="label">氣壓缸回復</span>
+            <span id="cylinderStatus" class="state-pill off">OFF</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel metrics-panel" aria-label="測試數據">
+        <h2>即時數據</h2>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <span class="metric-title">測試次數</span>
+            <span id="cycleCount" class="metric-value">0</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-title">力量 (kgf)</span>
+            <span id="forceValue" class="metric-value">0.0</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-title">角度 (deg)</span>
+            <span id="angleValue" class="metric-value">0.0</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel alarm-panel" aria-label="異常警報">
+        <div class="panel-title-row">
+          <h2>異常警報</h2>
+          <button id="clearAlarmBtn" class="btn ghost" type="button">清除警報</button>
+        </div>
+        <ul id="alarmList" class="alarm-list">
+          <li class="alarm-item ok">目前無異常</li>
+        </ul>
+      </section>
+
+      <section class="panel checklist-panel" aria-label="維修點檢表">
+        <h2>維修點檢表</h2>
+        <ul id="checklist" class="checklist">
+          <li><label><input type="checkbox" /> 伺服馬達固定螺絲檢查</label></li>
+          <li><label><input type="checkbox" /> 氣壓缸油封與接頭漏氣檢查</label></li>
+          <li><label><input type="checkbox" /> 力量感測器零點校正</label></li>
+          <li><label><input type="checkbox" /> 主腳架夾治具磨耗檢查</label></li>
+          <li><label><input type="checkbox" /> 急停功能測試</label></li>
+        </ul>
+      </section>
+
+      <section class="panel report-panel" aria-label="報告匯出">
+        <h2>報告</h2>
+        <button id="exportBtn" class="btn primary wide" type="button">匯出測試報告</button>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
