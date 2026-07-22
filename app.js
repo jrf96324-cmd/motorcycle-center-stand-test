@@ -16,6 +16,7 @@ const el = {
   startBtn: document.getElementById('startBtn'),
   stopBtn: document.getElementById('stopBtn'),
   estopBtn: document.getElementById('estopBtn'),
+  resetEmergencyBtn: document.getElementById('resetEmergencyBtn'),
   servoStatus: document.getElementById('servoStatus'),
   cylinderStatus: document.getElementById('cylinderStatus'),
   cycleCount: document.getElementById('cycleCount'),
@@ -31,6 +32,8 @@ let timer = null;
 function render() {
   el.autoModeBtn.classList.toggle('active', state.mode === 'auto');
   el.manualModeBtn.classList.toggle('active', state.mode === 'manual');
+  el.startBtn.disabled = state.emergency;
+  el.resetEmergencyBtn.disabled = !state.emergency;
 
   el.servoStatus.textContent = state.servoDown ? 'ON' : 'OFF';
   el.servoStatus.className = `state-pill ${state.servoDown ? 'on' : 'off'}`;
@@ -63,7 +66,7 @@ function setMode(mode) {
 }
 
 function startTest() {
-  if (state.emergency) return;
+  if (state.running || state.emergency) return;
   state.running = true;
   timer = setInterval(() => {
     if (!state.running) return;
@@ -83,8 +86,10 @@ function startTest() {
 
 function stopTest() {
   state.running = false;
-  clearInterval(timer);
-  timer = null;
+  if (timer !== null) {
+    clearInterval(timer);
+    timer = null;
+  }
   pushAlarm('warn', '測試已停止');
 }
 
@@ -93,8 +98,19 @@ function emergencyStop() {
   stopTest();
   state.servoDown = false;
   state.cylinderBack = true;
-  pushAlarm('danger', '急停觸發，請檢查設備');
+  pushAlarm('danger', '急停觸發，請檢查設備後再執行急停復歸');
   render();
+}
+
+function clearAlarms() {
+  state.alarms = [];
+  render();
+}
+
+function resetEmergency() {
+  if (!state.emergency) return;
+  state.emergency = false;
+  pushAlarm('ok', '急停已復歸，可重新啟動測試');
 }
 
 el.autoModeBtn.addEventListener('click', () => setMode('auto'));
@@ -102,11 +118,8 @@ el.manualModeBtn.addEventListener('click', () => setMode('manual'));
 el.startBtn.addEventListener('click', startTest);
 el.stopBtn.addEventListener('click', stopTest);
 el.estopBtn.addEventListener('click', emergencyStop);
-el.clearAlarmBtn.addEventListener('click', () => {
-  state.alarms = [];
-  state.emergency = false;
-  render();
-});
+el.resetEmergencyBtn.addEventListener('click', resetEmergency);
+el.clearAlarmBtn.addEventListener('click', clearAlarms);
 el.exportBtn.addEventListener('click', () => {
   const report = {
     timestamp: new Date().toISOString(),
