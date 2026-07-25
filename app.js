@@ -66,7 +66,7 @@ function setMode(mode) {
 }
 
 function startTest() {
-  if (state.running || state.emergency) return;
+  if (timer !== null || state.running || state.emergency) return;
   state.running = true;
   timer = setInterval(() => {
     if (!state.running) return;
